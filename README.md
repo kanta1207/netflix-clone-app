@@ -1,0 +1,1 @@
+Netflix clone app created with React, Typescript, Tailwindcss 
