@@ -4,7 +4,7 @@ import { ButtonProps } from "../../../types/propsTypes"
 export const TransparentButton :FC<ButtonProps>= (props) => {
  const {children} = props;
   return (
-    <button className="bg-transparent text-[#ffffff] px-2 py-1 md:px-4 md:py-2 cursor-pointer">
+    <button className="bg-transparent text-[#ffffff] px-4  py-1 md:px-4 md:py-2 cursor-pointer flex items-center">
         {children}
     </button>
   )
