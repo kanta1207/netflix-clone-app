@@ -1,4 +1,4 @@
-import React, { FC, Suspense } from "react";
+import React, { FC, memo, Suspense } from "react";
 import { MovieData } from "../../types/apiTypes";
 import { SlideShowLoading } from "../atoms/fallback/SlideShowLoading";
 
@@ -6,7 +6,7 @@ type Props = {
   moviesArray?: Array<MovieData>;
 };
 
-export const Slideshow: FC<Props> = (props) => {
+export const Slideshow: FC<Props> = memo((props) => {
   const { moviesArray } = props;
 
   return (
@@ -15,7 +15,7 @@ export const Slideshow: FC<Props> = (props) => {
         {moviesArray?.map((movie) => (
           <div
             key={movie.id}
-            className="w-[170px] sm:w-[230px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2"
+            className="w-[170px] sm:w-[230px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer p-2"
           >
             <img
               src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}
@@ -27,4 +27,4 @@ export const Slideshow: FC<Props> = (props) => {
       </div>
     </Suspense>
   );
-};
+});

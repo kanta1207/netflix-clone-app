@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { FC} from "react";
+import { FC, memo} from "react";
 import { Movies } from "../../types/apiTypes";
 import { Slideshow } from "./Slideshow";
 
@@ -9,7 +9,7 @@ type Props = {
   endPoint: string;
 };
 
-export const RowContainer: FC<Props> = (props) => {
+export const RowContainer: FC<Props> = memo((props) => {
   const { title, endPoint } = props;
 
   const fetchMovies = async () => {
@@ -25,7 +25,6 @@ export const RowContainer: FC<Props> = (props) => {
     <div className="my-2 w-full">
       <h2 className="text-[#ffffff] font-bold md:text-xl p-4">{title}</h2>
       <Slideshow moviesArray={data?.results} />
-      <div className="relative flex items-center"></div>
     </div>
   );
-};
+});

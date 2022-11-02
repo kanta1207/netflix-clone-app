@@ -1,5 +1,4 @@
 import { memo } from "react";
-import { OutlineButton } from "../atoms/buttons/OutlineButton";
 import { RedButton } from "../atoms/buttons/RedButton";
 import { TransparentButton } from "../atoms/buttons/TrasparentButton";
 import { NetflixLogo } from "../atoms/logos/NetflixLogo";
