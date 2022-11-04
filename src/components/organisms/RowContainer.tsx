@@ -1,16 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { FC, memo} from "react";
-import { Movies } from "../../types/apiTypes";
+import { MovieData, Movies } from "../../types/apiTypes";
 import { Slideshow } from "./Slideshow";
 
 type Props = {
   title: string;
   endPoint: string;
+  onOpenMoal : (movieData : MovieData | undefined) => void;
 };
 
 export const RowContainer: FC<Props> = memo((props) => {
-  const { title, endPoint } = props;
+  const { title, endPoint ,onOpenMoal} = props;
 
   const fetchMovies = async () => {
     console.log("fetchPopularMovies");
@@ -22,9 +23,9 @@ export const RowContainer: FC<Props> = memo((props) => {
   const { data } = useQuery<Movies>([title], fetchMovies);
 
   return (
-    <div className="my-2 w-full">
-      <h2 className="text-[#ffffff] font-bold md:text-xl p-4">{title}</h2>
-      <Slideshow moviesArray={data?.results} />
+    <div className="w-full">
+      <h2 className="text-[#ffffff] font-bold md:text-xl p-2">{title}</h2>
+      <Slideshow moviesArray={data?.results} onOpenModal={onOpenMoal}/>
     </div>
   );
 });

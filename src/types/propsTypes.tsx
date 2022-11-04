@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
 export type ButtonProps = {
-    // onClick : () => void;
+    onClick? : React.MouseEventHandler<HTMLButtonElement> | undefined;
     children : ReactNode;
 }

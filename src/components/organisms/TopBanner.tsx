@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { memo, Suspense, useState } from "react";
+import { FC, memo, Suspense, useState } from "react";
 import {
   AiOutlineDoubleLeft,
   AiOutlineDoubleRight,
@@ -9,12 +9,19 @@ import {
 import { BsPlayFill } from "react-icons/bs";
 
 import { movieDataRequests } from "../../api/movieDataRequest";
-import { Movies } from "../../types/apiTypes";
+import { useDetailDataModal } from "../../hooks/useDetailDataModal";
+import { MovieData, Movies } from "../../types/apiTypes";
 import { OutlineButton } from "../atoms/buttons/OutlineButton";
 import { WhiteButton } from "../atoms/buttons/WhiteButton";
 import { TopBannerLoading } from "../atoms/fallback/TopBannerLoading";
 
-export const TopBanner = memo(() => {
+type Props = {
+  onOpenModal : (movieData : MovieData | undefined) => void; 
+}
+
+export const TopBanner : FC<Props>= memo((props) => {
+  const {onOpenModal} = props;
+
   const [movieIndex, setMovieIndex] = useState(0);
   console.log("topBanner");
 
@@ -45,7 +52,7 @@ export const TopBanner = memo(() => {
 
   return (
     <Suspense fallback={<TopBannerLoading />}>
-      <div className="w-full h-[25%] lg:h-[578px] text-[#ffffff]">
+      <div className="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[480px] xl:h-[578px] text-[#ffffff]">
         <div className="w-full h-full">
           <div className="absolute w-full h-[15%] bg-gradient-to-b from-[#3D3837]"></div>
           <img
@@ -68,8 +75,8 @@ export const TopBanner = memo(() => {
               className="cursor-pointer opacity-20 hover:opacity-80 bg-[#3D3837]"
             />
           </div>
-          <div className="absolute top-[15%] sm:top-[20%] md:top-[23%] lg:top-[40%] mx-5">
-            <h1 className="text-1xl sm:text-2xl md:text-5xl font-bold my-3">
+          <div className="absolute top-[15%] sm:top-[20%] md:top-[30%] lg:top-[40%] mx-5">
+            <h1 className="text-1xl sm:text-2xl md:text-3xl lg:text-5xl font-bold my-3">
               {data?.results[movieIndex].title}
             </h1>
             <div className="flex space-x-3 my-2">
@@ -77,14 +84,11 @@ export const TopBanner = memo(() => {
                 <BsPlayFill />
                 Play
               </WhiteButton>
-              <OutlineButton>
+              <OutlineButton onClick={()=>onOpenModal(data?.results[movieIndex])}>
                 <AiOutlineInfoCircle />
                 More Info
               </OutlineButton>
             </div>
-            <p className="w-full text-[50%] sm:text-xs  max-w-[75%] sm:max-w-[70%] md:max-w-[50%] opacity-10 hover:opacity-75">
-              {data?.results[movieIndex].overview}
-            </p>
           </div>
         </div>
       </div>
