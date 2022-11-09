@@ -4,6 +4,7 @@ export const useDetailDataModal = () => {
     const [isOpen,setIsOpen] = useState(false)
     const [movieData,setMovieData] = useState<MovieData>()
 
+
     const onOpenModal = (movieData : MovieData | undefined) => {
         setMovieData(movieData);
         setIsOpen(true);

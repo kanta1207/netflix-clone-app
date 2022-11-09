@@ -4,11 +4,10 @@ import { SlideShowLoading } from "../atoms/fallback/SlideShowLoading";
 
 type Props = {
   moviesArray?: Array<MovieData>;
-  onOpenModal : (movieData : MovieData | undefined) => void;
 };
 
 export const Slideshow: FC<Props> = memo((props) => {
-  const { moviesArray ,onOpenModal} = props;
+  const { moviesArray } = props;
 
   return (
     <Suspense fallback={<SlideShowLoading/>}>
@@ -17,7 +16,6 @@ export const Slideshow: FC<Props> = memo((props) => {
           <div
             key={movie.id}
             className="w-[170px] sm:w-[230px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer hover:opacity-90 p-2"
-            onClick={()=>onOpenModal(movie)}
           >
             <img
               src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}

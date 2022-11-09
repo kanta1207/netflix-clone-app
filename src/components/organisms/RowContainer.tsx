@@ -7,14 +7,13 @@ import { Slideshow } from "./Slideshow";
 type Props = {
   title: string;
   endPoint: string;
-  onOpenMoal : (movieData : MovieData | undefined) => void;
 };
 
 export const RowContainer: FC<Props> = memo((props) => {
-  const { title, endPoint ,onOpenMoal} = props;
+  const { title, endPoint } = props;
 
   const fetchMovies = async () => {
-    console.log("fetchPopularMovies");
+    console.log("fetchMovies");
     const result = await axios.get<Movies>(endPoint);
     console.log(result.data.results);
     return result.data;
@@ -24,8 +23,8 @@ export const RowContainer: FC<Props> = memo((props) => {
 
   return (
     <div className="w-full">
-      <h2 className="text-[#ffffff] font-bold md:text-xl p-2">{title}</h2>
-      <Slideshow moviesArray={data?.results} onOpenModal={onOpenMoal}/>
+      <h2 className="text-[#ffffff] font-bold text-sm md:text-xl px-2 md:p-2">{title}</h2>
+      <Slideshow moviesArray={data?.results}/>
     </div>
   );
 });
