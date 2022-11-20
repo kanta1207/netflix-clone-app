@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { memo, Suspense, useState } from "react";
+import { memo, useState } from "react";
 import {
   AiOutlineDoubleLeft,
   AiOutlineDoubleRight,
@@ -13,14 +13,11 @@ import { useRecoilState } from "recoil";
 import { requests } from "../../api/movieDataRequest";
 import { selectedContentState } from "../../global/atoms";
 import { MovieData, Movies } from "../../types/apiTypes";
-import { OutlineButton } from "../atoms/buttons/OutlineButton";
-import { WhiteButton } from "../atoms/buttons/WhiteButton";
-import { TopBannerLoading } from "../atoms/fallback/TopBannerLoading";
-
-
+import { Button } from "../atoms/Button";
 export const TopBanner = memo(() => {
   const [movieIndex, setMovieIndex] = useState(0);
-  const [selectedContent,setSelectedContent] = useRecoilState(selectedContentState)
+  const [selectedContent, setSelectedContent] =
+    useRecoilState(selectedContentState);
   const navigate = useNavigate();
 
   console.log("topBanner");
@@ -52,12 +49,14 @@ export const TopBanner = memo(() => {
 
   //pass the movieData to Detail Info Page
   const onClickMoreInfo = () => {
-    setSelectedContent({contentData : data?.results[movieIndex] , contentId : data?.results[movieIndex].id})
+    setSelectedContent({
+      contentData: data?.results[movieIndex],
+      contentId: data?.results[movieIndex].id,
+    });
     navigate(`${data?.results[movieIndex].id}`);
-  }
+  };
 
   return (
-    <Suspense fallback={<TopBannerLoading />}>
       <div className="w-full h-[180px] sm:h-[300px] md:h-[400px] lg:h-[480px] xl:h-[578px] text-[#ffffff]">
         <div className="w-full h-full">
           <div className="absolute w-full h-[15%] bg-gradient-to-b from-[#3D3837]"></div>
@@ -81,23 +80,31 @@ export const TopBanner = memo(() => {
               className="cursor-pointer opacity-20 hover:opacity-80 bg-[#3D3837]"
             />
           </div>
-          <div className="absolute top-[15%] sm:top-[25%] md:top-[25%] lg:top-[20%] xl:top-[40%] mx-[3%] lg:mx-8  space-y-[5%] md:space-y-[5%]">
+          <div className="absolute top-[12%] sm:top-[25%] md:top-[20%] lg:top-[20%] xl:top-[40%] mx-[3%] lg:mx-8  space-y-[5%] md:space-y-[5%]">
             <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-5xl font-bold">
               {data?.results[movieIndex].title}
             </h1>
             <div className="flex space-x-3 my-2">
-              <WhiteButton>
-                <BsPlayFill />
+              {/* <WhiteButton> */}
+              <Button
+                buttonType="white"
+                mediaQueries="text-xs sm:text-sm md:text-lg px-3 md:px-4 py-1 md:py-2"
+              >
+                <BsPlayFill size={"1rem"} />
                 Play
-              </WhiteButton>
-              <OutlineButton onClick={()=>onClickMoreInfo()}>
-                <AiOutlineInfoCircle/>
+              </Button>
+              {/* </WhiteButton> */}
+              <Button
+                buttonType="outline"
+                mediaQueries="text-xs sm:text-sm md:text-lg px-3 md:px-4 py-1 md:py-2"
+                onClick={() => onClickMoreInfo()}
+              >
+                <AiOutlineInfoCircle size={"1rem"}/>
                 More Info
-              </OutlineButton>
+              </Button>
             </div>
           </div>
         </div>
       </div>
-    </Suspense>
   );
 });

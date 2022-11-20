@@ -9,12 +9,20 @@ import { useQuery } from "@tanstack/react-query";
 import { requestYouMightLikes } from "../../api/movieDataRequest";
 import { useRecoilState } from "recoil";
 import { selectedContentState } from "../../global/atoms";
+import { useNavigate } from "react-router-dom";
 
 
 export const DetailDataPage  = memo(() => {
   console.log("detailDataPage");
-  const [selectedContent] = useRecoilState(selectedContentState)
+  const navigate = useNavigate()
+  const [selectedContent,setSelectedContent] = useRecoilState(selectedContentState)
 
+  const onClickBack = () => {
+    navigate(-1)
+    setSelectedContent({contentData : undefined, contentId : undefined});
+  }
+
+  console.log(selectedContent.contentData)
   // const fetchSimilarMovies = async () => {
   //   console.log("fetchSimilarMovies");
   //   const result = await axios.get(requestYouMightLikes(selectedContent.contentData?.id));
@@ -32,7 +40,7 @@ export const DetailDataPage  = memo(() => {
           <div className="flex justify-end">
             <IoIosClose
               size="2.5rem"
-              // onClick={}
+              onClick={()=>onClickBack()}
               color={"#ffffff"}
               className="cursor-pointer absolute z-[100] opacity-60 hover:opacity-100"
             />
@@ -47,7 +55,7 @@ export const DetailDataPage  = memo(() => {
           </div>
           <div className="absolute top-[11%] sm:top-[15%] md:top-[11%] lg:top-[14%] xl:top-[20%] mx-3 md:mx-6 lg:mx-10">
             <h1 className="text-2xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-5xl font-bold my-3">
-              {selectedContent.contentData?.title}
+              {selectedContent.contentData?.title === undefined ? selectedContent.contentData?.name : selectedContent.contentData.title}
             </h1>
             <div className="flex my-2 md:my-6 lg:my-8 xl:my-10 space-x-2 xl:space-x-5">
               <WhiteButton>

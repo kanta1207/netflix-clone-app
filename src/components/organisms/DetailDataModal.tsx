@@ -26,12 +26,14 @@ export const DetailDataModal: FC<Props> = memo((props) => {
   };
 
   const { data } = useQuery<Movies>(["similarMovies"], fetchSimilarMovies);
+
+  const offsetHeight = document.body.offsetHeight;
   
   return (
     <>
       {isOpen ? (
-        <div className="absolute top-0 w-full h-[200%] z-[100]">
-          <div className="w-full h-[100%] bg-[#181818] opacity-50"></div>
+        <div className="absolute top-0 w-full z-[100]">
+          <div className={`w-full ${"h-[" + offsetHeight + "]"} bg-[#181818] opacity-50`}></div>
           <div className="absolute top-0 left-[2.5%] md:left-[10%] lg:left-[2.5%] xl:left-[20%] w-[95%] md:w-[80%] lg:w-[95%] xl:w-[60%] h-[99%] mt-8">
             <div className="w-full h-full bg-[#181818] text-[#ffffff] rounded-lg">
               <div className="flex justify-end">
