@@ -15,17 +15,17 @@ export const Navbar = memo(() => {
   useEffect(() => {
     window.addEventListener("scroll", () => {
       const position = window.scrollY;
-      console.log(position)
+      // console.log(position)
       if (position === 0) setIsAtTop(true);
       else if (position > 1 && isAtTop) setIsAtTop(false);
     });
   }, []);
 
-  useEffect(() => {
-    setOffSetHeight(document.body.offsetHeight);
-  }, [location]);
+  // useEffect(() => {
+  //   setOffSetHeight(document.body.offsetHeight);
+  // }, [location]);
 
-  console.log(offSetHeight)
+  // console.log(offSetHeight)
   return (
     <div className={`absolute h-[1594px] w-full`}>
       <div className="sticky top-0 w-full z-[90]">
@@ -39,14 +39,14 @@ export const Navbar = memo(() => {
               ) : (
                 <Button
                   buttonType="outline"
-                  mediaQueries="text-[0.5rem] text-xs sm:text-sm md:text-base px-2 md:px-3 py-1 md:px-4 md:py-2"
+                  mediaQueries="text-[0.5rem] sm:text-xs md:text-base px-2 md:px-3 py-1 md:px-4 md:py-2"
                 >
                   Sign Up
                 </Button>
               )}
               <Button
                 buttonType="red"
-                mediaQueries="text-[0.5rem] sm:text-xs sm:text-sm md:text-base px-2 md:px-3 py-1 md:px-4 md:py-2"
+                mediaQueries="text-[0.5rem] sm:text-xs md:text-base px-2 md:px-3 py-1 md:px-4 md:py-2"
               >
                 Sign In
               </Button>

@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { FC, memo} from "react";
 import { MovieData, Movies } from "../../types/apiTypes";
-import { Slideshow } from "./Slideshow";
+import { Display } from "../molecules/Display";
+
 
 type Props = {
   title: string;
@@ -24,7 +25,7 @@ export const RowContainer: FC<Props> = memo((props) => {
   return (
     <div className="w-full">
       <h2 className="text-[#ffffff] font-bold text-sm md:text-xl px-2 md:p-2">{title}</h2>
-      <Slideshow moviesArray={data?.results}/>
+      <Display moviesArray={data?.results} isSlideShow={true}/>
     </div>
   );
 });

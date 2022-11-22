@@ -23,6 +23,9 @@ type Api = {
   endPoint : string;
 }
 
+// https://api.themoviedb.org/33/movie/238/similar?api_key=0af8c53a93a70c59e150165ee668879f&language=en-US&page=1
+// https://api.themoviedb.org/3/movie/{movie_id}/similar?api_key=<<api_key>>&language=en-US&page=1
+
 export const apiArr: Array<Api> = [
   { title: "Trending Now",isSeries : true, endPoint: requests.requestTrending },
   {title: "Only on Netlfix", isSeries : true, endPoint: requests.requestNetflixOriginals},
@@ -38,9 +41,9 @@ export const apiArr: Array<Api> = [
 ];
 
 export const requestMovieDetails = (movieId: number | undefined = 1) =>
-  `${baseUrl}3/movie/${movieId}?requestskey=${key}&language=en-US`;
+  `${baseUrl}/movie/${movieId}?requestskey=${key}&language=en-US`;
 
-export const requestYouMightLikes = (genreId : number | undefined) =>
-  `${baseUrl}3/movie/${genreId}/similar?api_key=${key}&language=en-US&page=${genreId}`;
+export const requestYouMightLikes = (id : number | undefined) =>
+  `${baseUrl}/movie/${id}/similar?api_key=${key}&language=en-US&page=1`;
 
-  // ${baseUrl}3/movie/916605/similar?api_key=0af8c53a93a70c59e150165ee668879f&language=en-US&page=1
+  // ${baseUrl}/movie/916605/similar?api_key=0af8c53a93a70c59e150165ee668879f&language=en-US&page=1

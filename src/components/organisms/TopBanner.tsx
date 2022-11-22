@@ -51,7 +51,7 @@ export const TopBanner = memo(() => {
   const onClickMoreInfo = () => {
     setSelectedContent({
       contentData: data?.results[movieIndex],
-      contentId: data?.results[movieIndex].id,
+      contentId: data?.results[movieIndex].id
     });
     navigate(`${data?.results[movieIndex].id}`);
   };

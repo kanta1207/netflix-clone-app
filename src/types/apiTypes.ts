@@ -9,7 +9,10 @@ export type MovieData = {
   popularity: number;
   poster_path: string;
   release_date: string;
+  // tv series have the property "first_air_date" instead of "release_date"
+  first_air_date : string;
   title: string;
+  // tv series have the property "name" instead of "title"
   name : string;
   video: boolean;
   vote_average: number;
